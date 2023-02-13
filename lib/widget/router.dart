@@ -1,30 +1,12 @@
-
 import 'package:flutter/material.dart';
-import 'widget/router.dart';
+import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class RouterApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'SleepyCatcher',
-      home: RouterApp(),
-    );
-  }
-}
-/*
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
+  _RouterAppState createState() => _RouterAppState();
 }
 
-class _HomeState extends State<Home> {
+class _RouterAppState extends State<RouterApp> {
   var _selectedTab = _SelectedTab.home;
 
   void _handleIndexChanged(int i) {
@@ -70,5 +52,3 @@ class _HomeState extends State<Home> {
 }
 
 enum _SelectedTab { home, news }
-
- */
