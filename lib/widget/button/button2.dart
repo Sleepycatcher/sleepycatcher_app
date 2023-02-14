@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Button1 extends StatelessWidget {
+class Button2 extends StatelessWidget {
   final String text;
 
-  Button1({
+  Button2({
     required this.text,
   });
 
@@ -11,18 +11,14 @@ class Button1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50.0,
-      width: 200.0,
+      width: 250.0,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-            colors: [Color(0xffb77fff), Color(0xff6F28C9)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter
-        ),
+        color: const Color(0xff415fcd),
         borderRadius: BorderRadius.circular(30.0),
-        boxShadow: [
+        boxShadow: const[
           BoxShadow(
-            color: Colors.black26,
-            offset: Offset(2.0, 2.0),
+            color: const Color(0xff141e40),
+            offset: Offset(5.0, 10.0),
             blurRadius: 5.0,
           ),
         ],
