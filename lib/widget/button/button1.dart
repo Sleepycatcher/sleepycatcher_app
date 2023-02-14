@@ -14,9 +14,9 @@ class GradientButton extends StatelessWidget {
       width: 200.0,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            colors: [Colors.red, Colors.orange],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight
+            colors: [Color(0xffb77fff), Color(0xff6F28C9)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter
         ),
         borderRadius: BorderRadius.circular(30.0),
         boxShadow: [
