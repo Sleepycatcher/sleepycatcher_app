@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:sleepycatcher/pages/news/news.dart';
@@ -18,7 +20,7 @@ class _RouterAppState extends State<RouterApp> {
   void _handleIndexChanged(int i) {
     setState(() {
       _selectedTab = _SelectedTab.values.indexOf(_SelectedTab.values[i]);
-     });
+    });
   }
 
   void _handleIndexChangedByClick(int i) {
@@ -34,30 +36,37 @@ class _RouterAppState extends State<RouterApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-
-      body: Center (
-        child:  Container(
-          decoration:
-            const BoxDecoration(
-              gradient:  LinearGradient(
-               colors: [
-                Colors.blue,
-                Colors.purpleAccent
-              ],
-
-            )
-          ),
-          child: PageView(
-            controller: _pageController,
-            onPageChanged: _handleIndexChanged,
-            children: const<Widget> [
-              HomePage(),
-              NewsPage(),
-              ProfilePage(),
-              RecordPage(),
-              StatisticsPage()
+      body: Container(
+        decoration:
+          const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment(0.8, 1),
+              colors: <Color>[
+                Color(0xff1A1C2B),
+                Color(0xff1A1C2B),
+                Color(0xff1F223B),
+                Color(0xff1F223B),
+                Color(0xff1F223B),
+                Color(0xff1F223B),
+                Color(0xff1F223B),
+                Color(0xff1A1C2B),
+                Color(0xff1A1C2B),
+                Color(0xff1F223B),
+                Color(0xff1F223B),
             ],
-          ),
+          )
+        ),
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: _handleIndexChanged,
+          children: const<Widget> [
+            HomePage(),
+            NewsPage(),
+            ProfilePage(),
+            RecordPage(),
+            StatisticsPage(),
+          ],
         ),
       ),
       bottomNavigationBar: Padding(
