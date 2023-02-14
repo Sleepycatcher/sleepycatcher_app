@@ -1,42 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'widget/router.dart';
+
+
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("SleepyCather"),
-        ),
-        body: Center(
-          child:Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children:  [
-              Text(
-              "Accueil",
-              style: GoogleFonts.poppins(
-                  textStyle:TextStyle(fontSize: 42),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(brightness: Brightness.dark),
+      title: 'SleepyCatcher',
+      home: RouterApp(),
 
-            ),
-              ),
-             const Text(
-                "Accueil",
-                style: TextStyle(
-                  fontSize: 42,
-                )
-              ),
-            ],
-          )
-        )
-
-        ),
-      );
-
+    );
   }
 }
