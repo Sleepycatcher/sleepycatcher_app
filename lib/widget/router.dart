@@ -1,15 +1,15 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:sleepycatcher/pages/news/news.dart';
 import 'package:sleepycatcher/pages/record/record.dart';
 import 'package:sleepycatcher/pages/statistics/statistics.dart';
+import 'package:sleepycatcher/pages/auth/register.dart';
 
 import '../pages/home/home.dart';
 import '../pages/profile/profile.dart';
 
 class RouterApp extends StatefulWidget {
+  const RouterApp({Key? key}) : super(key: key);
   @override
   _RouterAppState createState() => _RouterAppState();
 }
@@ -29,8 +29,6 @@ class _RouterAppState extends State<RouterApp> {
       _pageController.jumpToPage(_selectedTab);
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +61,8 @@ class _RouterAppState extends State<RouterApp> {
           children: const<Widget> [
             HomePage(),
             NewsPage(),
-            ProfilePage(),
+            //ProfilePage(),
+            RegisterPage(),
             RecordPage(),
             StatisticsPage(),
           ],
@@ -73,14 +72,11 @@ class _RouterAppState extends State<RouterApp> {
         padding: const EdgeInsets.only(bottom: 10),
         child: DotNavigationBar(
           margin: const EdgeInsets.only(left: 10, right: 10),
-        //  currentIndex: _SelectedTab.values.indexOf(_selectedTab),
           currentIndex: _selectedTab,
           dotIndicatorColor: Colors.purpleAccent.withOpacity(0.2),
           unselectedItemColor: Colors.white,
           backgroundColor: Colors.purpleAccent.withOpacity(0.2),
-          // enableFloatingNavBar: false,
           onTap: _handleIndexChangedByClick,
-
 
           items: [
             /// HomePage
