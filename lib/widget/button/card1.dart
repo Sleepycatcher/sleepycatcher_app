@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Card1 extends StatelessWidget {
-  final String text;
+  final String title;
+  final String subtitle;
+
 
   Card1({
-    required this.text,
+    required this.title,
+    required this.subtitle
   });
 
   @override
@@ -14,9 +17,15 @@ class Card1 extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const ListTile(
-            title: Text('Titre de la carte'),
-            subtitle: Text('Sous-titre de la carte'),
+           ListTile(
+            title: Text(
+              title,
+              textAlign:TextAlign.center,
+            style: TextStyle(fontSize: 30)),
+            subtitle: Text(
+                subtitle,
+              textAlign:TextAlign.center,
+            ),
           ),
           const Divider(),
           Text('Contenu de la carte'),
