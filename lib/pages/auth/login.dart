@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:http/http.dart' as http;
+
 import 'package:sleepycatcher/pages/auth/register.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../pages/home/home.dart';
+
 import '../../model/User.dart';
 import 'dart:developer' as developer;
 
@@ -85,13 +90,21 @@ class _LoginPageState extends State<LoginPage> {
                   if(response != null) {
                     // si l'incription est valide
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(response.body)),
-                      // enregistrement du JWT dans l'app
+                      SnackBar(content: Text('Connexion valide !')),
                     );
+                    // enregistrement du JWT dans l'app
+                    final sharedPreferences = await SharedPreferences.getInstance();
+                    sharedPreferences.setString('jwt', response.body);
+                    // redirection vers la page Home
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+
                   } else {
-                    // si l'incription non valide
+                    // si la connexion non valide
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Erreur veuillez réessayer')),
+                      SnackBar(content: Text('Indentifiant non valides')),
                     );
                   }
                 }
