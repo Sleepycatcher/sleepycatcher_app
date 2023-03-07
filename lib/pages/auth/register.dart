@@ -2,12 +2,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import '../../services/authService.dart';
 import '../../widget/button/button1.dart';
 import 'package:http/http.dart' as http;
 import '../../model/User.dart';
 import 'dart:developer' as developer;
 
 final _formKey = GlobalKey<FormState>();
+
+AuthService authService = AuthService();
 
 Future<void> register(User user) async {
 try {
@@ -83,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: UnderlineInputBorder(),
                   labelText: 'email'
                 ),
-               validator: (value) {
+                validator: (value) {
                   if(value == null || value.isEmpty) return 'Vous devez renseigner un email';
                   if(!isEmail(value)) return 'Vous devez renseigner un email valide';
                   return null;
@@ -108,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: UnderlineInputBorder(),
                   labelText: 'mot de passe'
                 ),
-               validator: (value) {
+                validator: (value) {
                   if(value == null || value.isEmpty) return 'Vous devez renseigner un mot de passe';
                   if(value.length < 5) return 'Vous devez renseigner au moins 6 caractères';
                   if(value.length > 20) return '20 caractères maximum';
@@ -142,7 +145,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       email: _emailController.text,
                       password: _passwordController.text,
                     );
-                    http.Response response = register(user) as http.Response;
+                    //http.Response response2 = register(user) as http.Response;
+
+                    final response = await authService.register(user);
+                    if(response != null) {
+                        // si l'incription est valide
+                        ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(response.body)),
+                      );
+                    } else {
+                      // si l'incription non valide
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Erreur veuillez réessayer')),
+                      );
+                    }
                   }
                 },
                 child: const Text('Inscription'),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
+import 'package:sleepycatcher/pages/auth/login.dart';
 import 'package:sleepycatcher/pages/news/news.dart';
 import 'package:sleepycatcher/pages/record/record.dart';
 import 'package:sleepycatcher/pages/statistics/statistics.dart';
@@ -60,8 +61,9 @@ class _RouterAppState extends State<RouterApp> {
           onPageChanged: _handleIndexChanged,
           children: const<Widget> [
             HomePage(),
-            NewsPage(),
+            //NewsPage(),
             //ProfilePage(),
+            LoginPage(),
             RegisterPage(),
             RecordPage(),
             StatisticsPage(),
