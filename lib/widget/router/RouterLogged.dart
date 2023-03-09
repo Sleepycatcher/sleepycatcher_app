@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
-import 'package:sleepycatcher/pages/auth/login.dart';
 import 'package:sleepycatcher/pages/news/news.dart';
 import 'package:sleepycatcher/pages/record/record.dart';
 import 'package:sleepycatcher/pages/statistics/statistics.dart';
-import 'package:sleepycatcher/pages/auth/register.dart';
 
-import '../pages/home/home.dart';
-import '../pages/profile/profile.dart';
+import '../../pages/home/home.dart';
+import '../../../pages/profile/profile.dart';
 
-class RouterApp extends StatefulWidget {
-  const RouterApp({Key? key}) : super(key: key);
+class RouterLogged extends StatefulWidget {
+  const RouterLogged({Key? key}) : super(key: key);
   @override
-  _RouterAppState createState() => _RouterAppState();
+  _RouterLoggedState createState() => _RouterLoggedState();
 }
 
-class _RouterAppState extends State<RouterApp> {
+class _RouterLoggedState extends State<RouterLogged> {
   var _selectedTab = _SelectedTab.values.indexOf(_SelectedTab.home);
   final PageController _pageController = PageController();
   void _handleIndexChanged(int i) {
@@ -61,10 +59,8 @@ class _RouterAppState extends State<RouterApp> {
           onPageChanged: _handleIndexChanged,
           children: const<Widget> [
             HomePage(),
-            //NewsPage(),
-            //ProfilePage(),
-            LoginPage(),
-            RegisterPage(),
+            NewsPage(),
+            ProfilePage(),
             RecordPage(),
             StatisticsPage(),
           ],

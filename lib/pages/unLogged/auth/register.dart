@@ -2,10 +2,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import '../../services/authService.dart';
-import '../../widget/button/button1.dart';
+import 'package:sleepycatcher/services/authService.dart';
+
+//import '../../widget/button/button1.dart';
 import 'package:http/http.dart' as http;
-import '../../model/User.dart';
+import 'package:sleepycatcher/model/User.dart';
 import 'dart:developer' as developer;
 
 final _formKey = GlobalKey<FormState>();
@@ -129,9 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   return null;
                 },
               ),
-              GradientButton(
-                text: 'Inscription',
-              ),
+
               ElevatedButton(
                 onPressed: () async {
                   developer.log('press buttom');

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 
-import 'package:sleepycatcher/pages/auth/register.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../pages/home/home.dart';
-
-import '../../model/User.dart';
+import 'package:sleepycatcher/pages/unLogged/auth/register.dart';
+import 'package:sleepycatcher/model/User.dart';
 import 'dart:developer' as developer;
+
+import '../../home/home.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -96,6 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                     final sharedPreferences = await SharedPreferences.getInstance();
                     sharedPreferences.setString('jwt', response.body);
                     // redirection vers la page Home
+                    // ignore: use_build_context_synchronously
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => HomePage()),
