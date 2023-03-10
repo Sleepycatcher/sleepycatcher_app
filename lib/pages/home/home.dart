@@ -1,4 +1,4 @@
-import '../../flutter_flow/flutter_flow_calendar.dart';
+import 'package:table_calendar/table_calendar.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -6,16 +6,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
-
-
-
-
 class HomePage extends StatelessWidget {
 
-  const HomePage({Key? key}) : super(key: key);
+ const HomePage({Key? key}) : super(key: key);
+
 
   @override
+
   Widget build(BuildContext context) {
+
+    DateTime _selectedDay = DateTime.now();
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -175,60 +175,22 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              // Align(
-                              // alignment: AlignmentDirectional(0, -1),
-                              // child: Text(
-                              // valueOrDefault<String>(
-                              // dateTimeFormat(
-                              // 'MMMMEEEEd',
-                              // FFAppState().selectedDate,
-                              // locale: FFLocalizations.of(context)
-                              //     .languageCode,
-                              // ),
-                              // 'Date',
-                              // ),
-                              // style: FlutterFlowTheme.of(context)
-                              //     .bodyText1
-                              //     .override(
-                              // fontFamily: 'Poppins',
-                              // color: Colors.white,
-                              // fontSize: 20,
-                              // ),
-                              // ),
-                              // ),
-                              // Align(
-                              // alignment: AlignmentDirectional(0.3, 0.3),
-                              // child: FlutterFlowCalendar(
-                              // color: FlutterFlowTheme.of(context)
-                              //     .primaryColor,
-                              // weekFormat: true,
-                              // weekStartsMonday: true,
-                              // onChange: (DateTimeRange?
-                              // newSelectedDate) async {
-                              // _model.calendarSelectedDay =
-                              // newSelectedDate;
-                              // setState(() {
-                              // FFAppState().selectedDate =
-                              // _model.calendarSelectedDay?.start;
-                              // });
-                              // setState(() {});
-                              // },
-                              // titleStyle: FlutterFlowTheme.of(context)
-                              //     .subtitle1
-                              //     .override(
-                              // fontFamily: 'Poppins',
-                              // color: Colors.white,
-                              // fontSize: 20,
-                              // ),
-                              // dayOfWeekStyle: TextStyle(),
-                              // dateStyle: FlutterFlowTheme.of(context)
-                              //     .bodyText2,
-                              // selectedDateStyle: TextStyle(),
-                              // inactiveDateStyle: TextStyle(),
-                              // locale: FFLocalizations.of(context)
-                              //     .languageCode,
-                              // ),
-                              // ),
+                              Align(
+                                child: TableCalendar(
+                                  headerStyle:
+                                      HeaderStyle(formatButtonVisible: false,titleCentered: true),
+                                  focusedDay: _selectedDay,
+                                  firstDay: DateTime.utc(2023,1,01),
+                                  lastDay: DateTime.utc(2024,1,01),
+                                  calendarFormat: CalendarFormat.week,
+                                  onDaySelected: (selectedDay, focusedDay) {
+                                    print('La date sélectionnée est : $date');
+                                    _selectedDay= selectedDay;
+                                  },
+                                ),
+
+                              ),
+
                               Align(
                                 alignment: AlignmentDirectional(0.8, 0),
                                 child: Container(
@@ -376,6 +338,7 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
 
 
 
