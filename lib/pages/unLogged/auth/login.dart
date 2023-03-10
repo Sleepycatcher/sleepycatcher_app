@@ -11,7 +11,10 @@ import '../../home/home.dart';
 
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+
+  const LoginPage({super.key, required this.changePage});
+
+  final Function(int) changePage;
 
   @override
   _LoginPageState createState() => _LoginPageState();

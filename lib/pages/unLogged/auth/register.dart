@@ -51,7 +51,9 @@ TextEditingController _passwordController = TextEditingController();
 
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key, required this.changePage});
+
+  final Function(int) changePage;
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
