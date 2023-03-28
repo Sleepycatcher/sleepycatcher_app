@@ -1,36 +1,13 @@
-
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:sleepycatcher/services/authService.dart';
 
-//import '../../widget/button/button1.dart';
 import 'package:http/http.dart' as http;
 import 'package:sleepycatcher/model/User.dart';
 import 'dart:developer' as developer;
 
-final _formKey = GlobalKey<FormState>();
+
 
 AuthService authService = AuthService();
-
-Future<void> register(User user) async {
-try {
-  var url = Uri.parse("http://localhost:8000/api/auth/register");
-  var response = await http.post(url,body: {
-    "email":user.email,
-    "password":user.password,
-    "username":user.username,
-  });
-  if (response.statusCode == 201) {
-    print(response.body);
-  } else {
-    print('Request failed with status: ${response.statusCode}. ');
-  }
-} catch (e) {
-  print(e);
-}
-}
-
 
 
 bool isEmail(String em) {
@@ -45,19 +22,28 @@ bool isPasswordValid(String em) {
   return !regExp.hasMatch(em);
 }
 
-TextEditingController _emailController = TextEditingController();
-TextEditingController _usernameController = TextEditingController();
-TextEditingController _passwordController = TextEditingController();
+
 
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key, required this.changePage});
+
+  final Function(int) changePage;
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  void _onTap() {
+    widget.changePage(1); // Appelle la fonction changePage avec l'argument 1
+  }
 
   final myController = TextEditingController();
 
@@ -130,7 +116,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   return null;
                 },
               ),
-
               ElevatedButton(
                 onPressed: () async {
                   developer.log('press buttom');
@@ -162,8 +147,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 child: const Text('Inscription'),
               ),
-            ],
-          )
+              GestureDetector(
+                onTap: _onTap,
+                child: const Text(
+                  'Déjà un compte ?',
+                  style: TextStyle(fontSize: 24.0),
+                ),
+              ),
+          ]),
       ),
     );
   }

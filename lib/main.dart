@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'widget/router/RouterLogged.dart';
 import 'widget/router/RouterUnLogged.dart';
+import 'package:sleepycatcher/services/authService.dart';
+import 'dart:developer' as developer;
+AuthService authService = AuthService();
 
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
+  bool validJwt = await authService.checkJWT();
+  print("validJwt");
+  print(validJwt);
 
-  runApp(const MyApp());
+  runApp(MyApp(isLoggedIn: validJwt));
 }
 
-const isLoggedIn = true;
-
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool isLoggedIn;
+
+  const MyApp({Key? key, required this.isLoggedIn}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(brightness: Brightness.dark),
       title: 'SleepyCatcher',
-
       home: isLoggedIn ? const RouterLogged() : const RouterUnLogged(),
-
     );
   }
 }

@@ -8,11 +8,9 @@ import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
 
- const HomePage({Key? key}) : super(key: key);
-
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-
   Widget build(BuildContext context) {
 
     DateTime _selectedDay = DateTime.now();
@@ -338,9 +336,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
 

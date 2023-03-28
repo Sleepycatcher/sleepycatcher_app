@@ -25,8 +25,8 @@ class _RouterUnLoggedState extends State<RouterUnLogged> {
   void initState() {
     _pages = [
       FirstLog(changePage: _changePage),
-      LoginPage(),
-      RegisterPage(),
+      LoginPage(changePage: _changePage),
+      RegisterPage(changePage: _changePage),
     ];
     super.initState();
   }
