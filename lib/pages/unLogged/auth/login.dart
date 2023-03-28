@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sleepycatcher/pages/unLogged/auth/register.dart';
 import 'package:sleepycatcher/model/User.dart';
+import 'package:sleepycatcher/widget/router/RouterLogged.dart';
 import 'dart:developer' as developer;
 
 import '../../home/home.dart';
@@ -24,6 +25,10 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  void _onTap() {
+    widget.changePage(2); // Appelle la fonction changePage avec l'argument 2
+  }
 
   @override
   void dispose() {
@@ -89,7 +94,9 @@ class _LoginPageState extends State<LoginPage> {
                  // http.Response response = login(user) as http.Response;
 
                   final response = await authService.login(user);
-                  if(response != null) {
+
+
+                  if(response!.statusCode == 200) {
                     // si l'incription est valide
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Connexion valide !')),
@@ -101,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                     // ignore: use_build_context_synchronously
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                      MaterialPageRoute(builder: (context) => const RouterLogged()),
                     );
 
                   } else {
@@ -112,12 +119,18 @@ class _LoginPageState extends State<LoginPage> {
                   }
                 }
               },
-              child: const Text('Sign In'),
+              child: const Text('Connexion'),
+            ),
+            GestureDetector(
+              onTap: _onTap,
+              child: const Text(
+                'Pas de compte ?',
+                style: TextStyle(fontSize: 24.0),
+              ),
             ),
           ],
         ),
       ),
     );
-
   }
 }

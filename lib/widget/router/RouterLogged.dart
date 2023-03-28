@@ -4,8 +4,8 @@ import 'package:sleepycatcher/pages/news/news.dart';
 import 'package:sleepycatcher/pages/record/record.dart';
 import 'package:sleepycatcher/pages/statistics/statistics.dart';
 
-import '../../pages/home/home.dart';
-import '../../../pages/profile/profile.dart';
+import 'package:sleepycatcher/pages/home/home.dart';
+import 'package:sleepycatcher/pages/profile/profile.dart';
 
 class RouterLogged extends StatefulWidget {
   const RouterLogged({Key? key}) : super(key: key);

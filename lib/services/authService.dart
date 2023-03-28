@@ -56,23 +56,23 @@ class AuthService {
     return prefs.getString('jwt');
   }
 
-  Future<http.Response?> checkJWT(User user) async {
+  Future<bool> checkJWT() async {
+    String? jwt = await getJWT(); //
+
+    if(jwt == null) return false;
+
     try {
-      var url = Uri.parse("https://sleepycatcherapi.hop.sh/api/api/auth");
-      String? jwt = await getJWT(); //
+      var url = Uri.parse("https://sleepycatcherapi.hop.sh/api/auth/?API_KEY=sf4g2f6sdf45s4df65s4d65fsdc21c31x2c3");
       var response = await http.get(
         url,
-        headers: {"Authorization": "Bearer $jwt"},
+        headers: {"Authorization": "Scla $jwt"},
       );
-      if (response.statusCode == 200) {
-        print(response.body);
-      } else {
-        print('Connexion non valide');
-      }
-      return response;
+
+      if (response.statusCode == 204 || response.statusCode == 200) return true;
+      return false;
+
     } catch (e) {
-      print(e);
-      return null;
+      return false;
     }
   }
 
