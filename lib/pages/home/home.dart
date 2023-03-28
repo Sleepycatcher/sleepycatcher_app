@@ -184,7 +184,7 @@ class HomePage extends StatelessWidget {
                                   lastDay: DateTime.utc(2024,1,01),
                                   calendarFormat: CalendarFormat.week,
                                   onDaySelected: (selectedDay, focusedDay) {
-                                    print('La date sélectionnée est : $date');
+                                  
                                     _selectedDay= selectedDay;
                                   },
                                 ),
