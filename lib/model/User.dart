@@ -5,7 +5,7 @@ class User {
 
   User({this.username, this.email, required this.password});
 
-  Map<String, dynamic> toJresson() {
+  Map<String, dynamic> toJson() {
     return {
       'username': username,
       'email': email,
