@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import '../../flutter_flow/flutter_flow_theme.dart';
 
 class NewsPage extends StatelessWidget {
   const NewsPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('News'),
-      ),
-      body: ListView(
+    return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+    const Padding(
+    padding: EdgeInsets.all(8.0),
+    child: Text(
+    'News',
+    style: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 30.0,
+    ),
+    ),
+    ),
+    Expanded(
+    child: ListView(
         children: [
           _buildArticle(
             'Conseils pour mieux dormir la nuit',
@@ -49,6 +60,8 @@ class NewsPage extends StatelessWidget {
 
         ],
       ),
+    ),
+    ],
     );
   }
 

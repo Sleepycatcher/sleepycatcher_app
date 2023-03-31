@@ -62,7 +62,7 @@ class _RouterLoggedState extends State<RouterLogged> {
             NewsPage(),
             ProfileView(),
             RecordPage(),
-            StatisticPage(),
+
           ],
         ),
       ),
@@ -97,12 +97,10 @@ class _RouterLoggedState extends State<RouterLogged> {
               icon: const Icon(Icons.shield_moon),
               selectedColor: const Color(0xff73544C),
             ),
-            /// Statistic
-            DotNavigationBarItem(
-              icon: const Icon(Icons.query_stats),
-              selectedColor: const Color(0xff73544C),
 
-            ),
+
+
+
           ],
         ),
       ),

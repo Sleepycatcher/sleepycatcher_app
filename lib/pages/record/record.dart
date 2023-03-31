@@ -53,9 +53,7 @@ class _SleepRecorderPageState extends State<RecordPage> {
     _showSnackBar('Réveil annulé.');
   }
 
-  void _startAlarm() async {
 
-  }
 
   void _stopAlarm() async {
 
@@ -74,14 +72,19 @@ class _SleepRecorderPageState extends State<RecordPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Enregistreur de sommeil'),
-      ),
-      body: Center(
-        child: Column(
+    return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Suivi du Sommeil',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30.0,
+                ),
+              ),
+            ),
             ElevatedButton(
               onPressed: _isRecording ? _stopRecording : _startRecording,
               child: Text(_isRecording ? 'Arrêter l\'enregistrement' : 'Commencer l\'enregistrement'),
@@ -94,13 +97,10 @@ class _SleepRecorderPageState extends State<RecordPage> {
             if (_isAlarmSet) SizedBox(height: 10),
             if (_isAlarmSet) Text('Réveil programmé à ${_formatTime(_alarmTime!)}'),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _isAlarmSet ? _startAlarm : null,
-              child: Text('Démarrer le réveil'),
-            ),
+
           ],
-        ),
-      ),
-    );
+
+      );
+
   }
 }

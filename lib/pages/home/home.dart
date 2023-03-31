@@ -14,7 +14,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     DateTime _selectedDay = DateTime.now();
-    return Center(
+    return Scrollbar(
+
+      child: SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -249,7 +251,7 @@ class HomePage extends StatelessWidget {
                                                   AlignmentDirectional(
                                                       -1, -1),
                                                   child: Text(
-                                                    'Eveillé : 20 min',
+                                                    'Eveillé : 30 min',
                                                     style: FlutterFlowTheme
                                                         .of(context)
                                                         .bodyText1
@@ -266,7 +268,7 @@ class HomePage extends StatelessWidget {
                                                   AlignmentDirectional(
                                                       -1, -1),
                                                   child: Text(
-                                                    'léger : 20 min',
+                                                    'léger : 2h10',
                                                     style: FlutterFlowTheme
                                                         .of(context)
                                                         .bodyText1
@@ -283,7 +285,7 @@ class HomePage extends StatelessWidget {
                                                   AlignmentDirectional(
                                                       -1, -1),
                                                   child: Text(
-                                                    'Profond : 20 min',
+                                                    'Profond : 1h21',
                                                     style: FlutterFlowTheme
                                                         .of(context)
                                                         .bodyText1
@@ -300,7 +302,7 @@ class HomePage extends StatelessWidget {
                                                   AlignmentDirectional(
                                                       -1, -1),
                                                   child: Text(
-                                                    'Paradoxale : 20 min',
+                                                    'Paradoxale : 45 min',
                                                     style: FlutterFlowTheme
                                                         .of(context)
                                                         .bodyText1
@@ -317,7 +319,18 @@ class HomePage extends StatelessWidget {
                                           ),
                                         ),
                                       ),
+
                                     ],
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(0, 0.65),
+                                child:  ElevatedButton(
+                                  onPressed: () {},
+                                  child: Text('voir plus'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.blue,
                                   ),
                                 ),
                               ),
@@ -333,6 +346,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }
