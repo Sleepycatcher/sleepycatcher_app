@@ -1,72 +1,54 @@
 import 'package:flutter/material.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
-import '../../model/Article.dart';
-import '../../services/ArticleService.dart';
-import 'dart:convert';
 
-class NewsPage extends StatefulWidget {
-
+class NewsPage extends StatelessWidget {
   const NewsPage({Key? key}) : super(key: key);
-
-  @override
-  _NewsPageState createState() => _NewsPageState();
-}
-
-class _NewsPageState extends State<NewsPage> {
-  List<Article> articles = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadArticles();
-  }
-
-  void _loadArticles() async {
-    final articleService = ArticleService();
-    final response = await articleService.getAllArticle();
-    if (response != null && response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      if (jsonData['articles'] != null) {
-        final List<dynamic> jsonArticles = jsonData['articles'];
-        List<Article> loadedArticles = jsonArticles
-            .map((dynamic json) => Article.fromJson(json))
-            .toList();
-        setState(() {
-          articles = loadedArticles;
-          print(articles.length);
-        });
-      }
-    }
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('News'),
       ),
-      body: ListView.builder(
-        itemCount: articles.length,
-        itemBuilder: (context, index) {
-          final article = articles[index];
-          return Card(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  article.title,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Text(article.source),
-                Text(article.content),
-              ],
-            ),
-          );
-        },
-      ),
+      body: ListView(
+        children: [
+          _buildArticle(
+            'Conseils pour mieux dormir la nuit',
+            'https://example.com/articles/sommeil/conseils-bien-dormir',
+            'Dormir suffisamment est important pour notre santé et notre bien-être. Voici quelques conseils pour améliorer la qualité de votre sommeil la nuit.',
 
+          ),
+          _buildArticle(
+            'Les effets du manque de sommeil sur la santé',
+            'https://example.com/articles/sommeil/effets-manque-sommeil',
+            'Le manque de sommeil peut avoir de graves conséquences sur notre santé physique et mentale. Découvrez les effets du manque de sommeil et comment y remédier.',
+
+          ),
+          _buildArticle(
+            'Les différents cycles de sommeil',
+            'https://example.com/articles/sommeil/cycles-sommeil',
+            'Le sommeil est un processus complexe qui se compose de différents cycles. Découvrez les différents stades du sommeil et leur importance pour notre récupération.',
+
+          ),
+          _buildArticle(
+            'Les bienfaits d\'une sieste régulière',
+            'https://example.com/articles/sommeil/bienfaits-sieste',
+            'Prendre une sieste peut être bénéfique pour votre productivité, votre créativité et votre santé mentale. Découvrez les bienfaits d\'une sieste régulière.',
+
+          ),
+          _buildArticle(
+            'Comment créer un rituel du coucher apaisant',
+            'https://example.com/articles/sommeil/rituel-coucher',
+            'Créer un rituel du coucher apaisant peut vous aider à vous endormir plus facilement et à améliorer la qualité de votre sommeil. Voici quelques astuces pour créer votre propre rituel.',
+
+          ),
+          _buildArticle(
+            'Les dangers des somnifères',
+            'https://example.com/articles/sommeil/dangers-somniferes',
+            'Les somnifères peuvent sembler être une solution rapide pour lutter contre l\'insomnie, mais ils peuvent avoir de graves effets secondaires et être très addictifs. Découvrez les dangers des somnifères.',
+            
+          ),
+
+        ],
+      ),
     );
   }
 
