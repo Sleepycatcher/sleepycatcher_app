@@ -57,7 +57,7 @@ class AuthService {
   }
 
   Future<bool> checkJWT() async {
-    String? jwt = await getJWT(); //
+    String? jwt = await getJWT();
 
     if(jwt == null) return false;
 

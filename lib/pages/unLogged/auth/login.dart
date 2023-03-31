@@ -41,96 +41,112 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your email address';
-                }
-                if (!value.contains('@')) {
-                  return 'Please enter a valid email address';
-                }
-                return null;
-              },
+      child: Column(
+        children: [
+          const Text(
+            'Connexion',
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 16),
-            TextFormField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your password';
-                }
-                if (value.length < 8) {
-                  return 'Password must be at least 8 characters';
-                }
-                return null;
-              },
+          ),
+          const SizedBox(height: 20),
+          Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your email address';
+                    }
+                    if (!value.contains('@')) {
+                      return 'Please enter a valid email address';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    if (value.length < 8) {
+                      return 'Password must be at least 8 characters';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: () async {
+                    developer.log('press buttom');
+                    if (_formKey.currentState!.validate()) {
+                      User user = User(
+                        username:  _emailController.text,
+                        email:  _emailController.text,
+                        password: _passwordController.text,
+                      );
+
+                      final response = await authService.login(user);
+                      if(response!.statusCode == 200) {
+                        // si l'incription est valide
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Connexion valide !')),
+                        );
+                        // enregistrement du JWT dans l'app
+                        final sharedPreferences = await SharedPreferences.getInstance();
+                        sharedPreferences.setString('jwt', response.body);
+                        // redirection vers la page Home
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const RouterLogged()),
+                        );
+
+                      } else {
+                        // si la connexion non valide
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Indentifiant non valides')),
+                        );
+                      }
+                    }
+                  },
+                  child: const Text('Connexion'),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    minimumSize: Size(0.5 * MediaQuery.of(context).size.width, 24.0),
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                  ),
+                ),
+                SizedBox(height: 24),
+                GestureDetector(
+                  onTap: _onTap,
+                  child: const Text(
+                    'Pas de compte ?',
+                    style: TextStyle(fontSize: 24.0),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () async {
-                developer.log('press buttom');
-                if (_formKey.currentState!.validate()) {
-                  // Submit form
-                  // Call your authentication API here
-                  User user = User(
-                    username:  _emailController.text,
-                    email:  _emailController.text,
-                    password: _passwordController.text,
-                  );
-                 // http.Response response = login(user) as http.Response;
-
-                  final response = await authService.login(user);
-
-
-                  if(response!.statusCode == 200) {
-                    // si l'incription est valide
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Connexion valide !')),
-                    );
-                    // enregistrement du JWT dans l'app
-                    final sharedPreferences = await SharedPreferences.getInstance();
-                    sharedPreferences.setString('jwt', response.body);
-                    // redirection vers la page Home
-                    // ignore: use_build_context_synchronously
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const RouterLogged()),
-                    );
-
-                  } else {
-                    // si la connexion non valide
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Indentifiant non valides')),
-                    );
-                  }
-                }
-              },
-              child: const Text('Connexion'),
-            ),
-            GestureDetector(
-              onTap: _onTap,
-              child: const Text(
-                'Pas de compte ?',
-                style: TextStyle(fontSize: 24.0),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+
   }
-}
+  }
