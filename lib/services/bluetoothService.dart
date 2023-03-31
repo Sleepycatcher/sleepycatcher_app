@@ -4,30 +4,43 @@ class BluetoothService {
   late BluetoothConnection? _connection;
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
 
+  get isConnected => null;
+
   // Vérifie si le Bluetooth est activé sur l'appareil.
   Future<bool> isBluetoothEnabled() async {
     _bluetoothState = await FlutterBluetoothSerial.instance.state;
     return _bluetoothState == BluetoothState.STATE_ON;
   }
 
-  // Recherche les appareils Bluetooth disponibles à proximité.
   Future<List<BluetoothDevice>> searchForDevices() async {
-    List<BluetoothDevice> devices = [];
+    final List<BluetoothDevice> devices = [];
 
     try {
-      devices = await FlutterBluetoothSerial.instance.getBondedDevices();
-      devices += await FlutterBluetoothSerial.instance
-          .startDiscovery()
-          .where((result) => !devices.any((d) => d.address == result.device.address))
-          .map((result) => result.device)
-          .toList();
+      final List<BluetoothDevice> bondedDevices =
+      await FlutterBluetoothSerial.instance.getBondedDevices();
+      devices.addAll(bondedDevices);
 
+      final Stream<BluetoothDiscoveryResult> discoveryStream =
+      FlutterBluetoothSerial.instance.startDiscovery();
+      discoveryStream.listen((discoveryResult) {
+        if (!devices.contains(discoveryResult.device)) {
+          devices.add(discoveryResult.device);
+        }
+      });
     } catch (ex) {
       print('Error searching for devices: $ex');
     }
 
+    print("device result");
+    devices.forEach((device) {
+      print(device.name);
+      print(device.address);
+    });
+    print("device result end");
     return devices;
   }
+
+
 
   // Connecte l'appareil Bluetooth avec l'adresse MAC donnée.
   Future<bool> connect(String macAddress) async {

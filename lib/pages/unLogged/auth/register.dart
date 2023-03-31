@@ -116,20 +116,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   return null;
                 },
               ),
+              SizedBox(height: 24),
               ElevatedButton(
                 onPressed: () async {
                   developer.log('press buttom');
                   // Validate returns true if the form is valid, or false otherwise.
                   if (_formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Inscription en cours ! ')),
+                      const SnackBar(content: Text('Inscription en cours !')),
                     );
                     User user = User(
                       username: _usernameController.text,
                       email: _emailController.text,
                       password: _passwordController.text,
                     );
-                    //http.Response response2 = register(user) as http.Response;
 
                     final response = await authService.register(user);
                     if(response != null) {
@@ -146,7 +146,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   }
                 },
                 child: const Text('Inscription'),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  minimumSize: Size(0.5 * MediaQuery.of(context).size.width, 24.0),
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                ),
               ),
+              SizedBox(height: 24),
               GestureDetector(
                 onTap: _onTap,
                 child: const Text(

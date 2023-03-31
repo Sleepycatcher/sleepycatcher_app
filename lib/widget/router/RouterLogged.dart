@@ -60,9 +60,9 @@ class _RouterLoggedState extends State<RouterLogged> {
           children: const<Widget> [
             HomePage(),
             NewsPage(),
-            ProfilePage(),
+            ProfileView(),
             RecordPage(),
-            StatisticsPage(),
+            StatisticPage(),
           ],
         ),
       ),

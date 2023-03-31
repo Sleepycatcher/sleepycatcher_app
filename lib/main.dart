@@ -4,11 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'widget/router/RouterLogged.dart';
 import 'widget/router/RouterUnLogged.dart';
 import 'package:sleepycatcher/services/authService.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:developer' as developer;
 AuthService authService = AuthService();
 
 
 void main() async {
+  // await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
 
   bool validJwt = await authService.checkJWT();
